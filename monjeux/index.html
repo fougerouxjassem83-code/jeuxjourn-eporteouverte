@@ -1,140 +1,83 @@
-
-Copier
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zombie Shooter — SMA Mayotte</title>
- 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
- 
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
- 
-  <!-- ══════════════════════════════════
-       ÉCRAN 1 — SAISIE DU NOM
-  ══════════════════════════════════ -->
-<header>
-    <div class="monjeux-header">
-      <img src="sma-logo.png" alt="Logo du SMA Mayotte" class="sma-logo" />
-      <h1 class="sma-title">Régiment du Service Militaire Adapté — Mayotte</h1>
-    </div>
-  
+
+  <!-- ÉCRAN NOM -->
   <div id="screen-name" class="screen show">
-    <div class="logo">🧟</div>
-    <h1>ZOMBIE SHOOTER</h1>
-    <div class="sma-tag">⚔️ Régiment du Service Militaire Adapté — Mayotte ⚔️</div>
- 
-    <input
-      id="name-input"
-      type="text"
-      maxlength="20"
-      placeholder="Ton nom, Soldat !"
-      autocomplete="off"
-      spellcheck="false"
-    />
-    <div class="hint">Appuie sur Entrée ou clique sur Continuer</div>
- 
-    <button id="btn-name" class="btn">▶ CONTINUER</button>
-    <button id="btn-leaderboard-open" class="btn secondary">🏆 CLASSEMENT</button>
-  </div>
- 
-  <!-- ══════════════════════════════════
-       ÉCRAN 2 — CHOIX DE L'ARME
-  ══════════════════════════════════ -->
-  <div id="screen-weapon" class="screen">
-    <h2 id="weapon-title">Choisis ton arme !</h2>
-    <div class="sma-tag">Sélectionne une arme puis lance la mission</div>
- 
-    <div id="weapon-grid" class="weapon-grid"></div>
- 
-    <div class="hint">ZQSD / Flèches = déplacer · Souris = viser · Clic = tirer · R = recharger · 1-4 = changer d'arme</div>
- 
-    <button id="btn-start" class="btn">🎯 LANCER LA MISSION</button>
-    <button id="btn-weapon-back" class="btn secondary">← RETOUR</button>
-  </div>
- 
-  <!-- ══════════════════════════════════
-       ÉCRAN 3 — JEU
-  ══════════════════════════════════ -->
-  <div id="screen-game" class="screen game-screen">
- 
-    <!-- HUD -->
-    <div class="hud">
-      <div class="hud-block" id="hud-name">🪖 <span>Soldat</span></div>
- 
-      <div class="hud-block">
-        ❤️&nbsp;
-        <div id="hud-hp" class="hearts"></div>
-      </div>
- 
-      <div class="hud-block">
-        🔫&nbsp;
-        <div id="hud-ammo"></div>
-      </div>
- 
-      <div class="hud-block">
-        ⭐&nbsp;<span id="hud-score">0</span>
-      </div>
- 
-      <div class="hud-block">
-        🌊&nbsp;Vague&nbsp;<span id="hud-wave">1</span>
-      </div>
- 
-      <div id="hud-weapons"></div>
+    <div class="name-bg-deco"></div>
+    <div class="screen-card name-card">
+      <div class="zombie-logo">🧟</div>
+      <h1>ZOMBIE SHOOTER</h1>
+      <p class="sma-tag">⚔️ Régiment du Service Militaire Adapté — Mayotte ⚔️</p>
+      <div class="divider"></div>
+      <label class="field-label">Ton nom, Soldat !</label>
+      <input id="name-input" type="text" maxlength="20" placeholder="Entre ton prénom..." autocomplete="off" />
+      <p class="hint-small">Appuie sur Entrée ou clique sur Continuer</p>
+      <button class="btn btn-primary" id="btn-name">▶ &nbsp;CONTINUER</button>
+      <button class="btn btn-ghost" id="btn-leaderboard-open">🏆 &nbsp;CLASSEMENT</button>
     </div>
- 
-    <!-- Canvas principal -->
-    <canvas id="gc"></canvas>
- 
   </div>
- 
-  <!-- ══════════════════════════════════
-       ÉCRAN 4 — GAME OVER
-  ══════════════════════════════════ -->
-  <div id="screen-gameover" class="screen">
-    <div class="go-icon">💀</div>
-    <div id="go-grade" class="go-grade">Recrue</div>
-    <div id="go-name-label" class="go-name">Soldat — Bien combattu !</div>
- 
-    <div class="go-stats">
-      <div class="go-stat">
-        <div id="go-score" class="stat-num">0</div>
-        <div class="stat-label">Points</div>
-      </div>
-      <div class="go-stat">
-        <div id="go-wave" class="stat-num">1</div>
-        <div class="stat-label">Vague</div>
-      </div>
-      <div class="go-stat">
-        <div id="go-kills" class="stat-num">0</div>
-        <div class="stat-label">Éliminations</div>
-      </div>
-    </div>
- 
-    <button id="btn-replay"   class="btn">🔄 REJOUER</button>
-    <button id="btn-go-lb"    class="btn secondary">🏆 CLASSEMENT</button>
-    <button id="btn-go-name"  class="btn secondary">🏠 ACCUEIL</button>
-  </div>
- 
-  <!-- ══════════════════════════════════
-       ÉCRAN 5 — LEADERBOARD
-  ══════════════════════════════════ -->
+
+  <!-- ÉCRAN LEADERBOARD -->
   <div id="screen-leaderboard" class="screen">
-    <h2>🏆 Classement</h2>
-    <div class="sma-tag">Les meilleurs soldats du SMA Mayotte</div>
- 
-    <div id="lb-list" class="lb-list"></div>
- 
-    <button id="btn-lb-back" class="btn secondary">← RETOUR</button>
+    <div class="screen-card lb-card">
+      <h2>🏆 Tableau des Scores</h2>
+      <p class="sma-tag" style="font-size:12px;margin-bottom:16px">SMA Mayotte — Journée Portes Ouvertes</p>
+      <div id="lb-list" class="lb-list"></div>
+      <button class="btn btn-ghost" id="btn-lb-back">← Retour</button>
+    </div>
   </div>
- 
+
+  <!-- ÉCRAN ARME -->
+  <div id="screen-weapon" class="screen">
+    <div class="screen-card weapon-card">
+      <h2 id="weapon-title">Choisis ton arme !</h2>
+      <p class="hint-small" style="margin-bottom:20px">Sélectionne une arme puis lance la mission</p>
+      <div class="weapon-grid" id="weapon-grid"></div>
+      <p class="controls-hint">ZQSD / Flèches = déplacer &nbsp;·&nbsp; Souris = viser &nbsp;·&nbsp; Clic = tirer &nbsp;·&nbsp; R = recharger &nbsp;·&nbsp; 1-4 = changer d'arme</p>
+      <button class="btn btn-primary" id="btn-start">🎯 &nbsp;LANCER LA MISSION</button>
+      <button class="btn btn-ghost" id="btn-weapon-back">← Retour</button>
+    </div>
+  </div>
+
+  <!-- JEU -->
+  <div id="screen-game" class="screen game-screen">
+    <div class="hud">
+      <div class="hud-block" id="hud-hp"></div>
+      <div class="hud-block" id="hud-name"></div>
+      <div class="hud-block" id="hud-weapons"></div>
+      <div class="hud-block" id="hud-ammo"></div>
+      <div class="hud-block">🏆 <span id="hud-score">0</span> pts &nbsp;|&nbsp; Vague <span id="hud-wave">1</span></div>
+    </div>
+    <canvas id="gc"></canvas>
+  </div>
+
+  <!-- GAME OVER -->
+  <div id="screen-gameover" class="screen">
+    <div class="screen-card go-card">
+      <div class="go-icon">💀</div>
+      <h2>MISSION ÉCHOUÉE</h2>
+      <div id="go-grade" class="go-grade"></div>
+      <p id="go-name-label" class="go-name"></p>
+      <div class="go-stats">
+        <div class="go-stat"><div class="stat-num" id="go-score">0</div><div class="stat-label">Points</div></div>
+        <div class="go-stat"><div class="stat-num" id="go-wave">1</div><div class="stat-label">Vague</div></div>
+        <div class="go-stat"><div class="stat-num" id="go-kills">0</div><div class="stat-label">Zombies</div></div>
+      </div>
+      <button class="btn btn-primary" id="btn-replay">🔄 &nbsp;REJOUER</button>
+      <button class="btn btn-ghost" id="btn-go-lb">🏆 &nbsp;CLASSEMENT</button>
+      <button class="btn btn-ghost" id="btn-go-name">← Changer de soldat</button>
+    </div>
+  </div>
+
   <script src="game.js"></script>
 </body>
 </html>
+
